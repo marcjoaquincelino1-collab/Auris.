@@ -3,125 +3,99 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Auris AI</title>
-
 <style>
-
 body{
-margin:0;
-height:200vh;
-background:#0f172a;
-overflow-x:hidden;
-font-family:Arial;
+    margin:0;
+    height:200vh;
+    background:#0f172a;
+    font-family:Arial,sans-serif;
 }
 
 /* AI Orb */
-
 #auris{
-
-position:fixed;
-width:70px;
-height:70px;
-border-radius:50%;
-
-background:radial-gradient(circle at 30% 30%,#60a5fa,#1e3a8a);
-
-box-shadow:
-0 0 20px #60a5fa,
-0 0 40px #1e40af,
-0 0 60px #1e3a8a;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-cursor:pointer;
-
-transition:
-transform .15s linear,
-left .15s linear,
-top .15s linear;
-
-z-index:9999;
+    position:fixed;
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:radial-gradient(circle,#60a5fa,#1e3a8a);
+    box-shadow:0 0 20px #60a5fa,0 0 40px #1e40af;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:9999;
+    transform:translate(-50%, -50%);
+    transition: transform 0.1s linear;
 }
 
-/* Inner Pulse */
-
+/* Pulse inside */
 #auris::after{
-
-content:"";
-
-width:30px;
-height:30px;
-
-border-radius:50%;
-
-background:white;
-
-opacity:.7;
-
-animation:pulse 2s infinite;
-
+    content:"";
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:white;
+    opacity:0.7;
+    animation:pulse 2s infinite;
 }
-
 @keyframes pulse{
-
-0%{transform:scale(.6);opacity:.7}
-50%{transform:scale(1);opacity:1}
-100%{transform:scale(.6);opacity:.7}
-
+    0%{transform:scale(0.6);opacity:0.7}
+    50%{transform:scale(1);opacity:1}
+    100%{transform:scale(0.6);opacity:0.7}
 }
-
 </style>
 </head>
-
 <body>
 
 <div id="auris"></div>
 
 <script>
+const auris = document.getElementById("auris");
 
-const auris = document.getElementById("auris")
+let orbX = window.innerWidth/2;
+let orbY = window.innerHeight/2;
 
-let x = window.innerWidth/2
-let y = window.innerHeight/2
+let mouseX = orbX;
+let mouseY = orbY;
 
-auris.style.left = x + "px"
-auris.style.top = y + "px"
+auris.style.left = orbX + "px";
+auris.style.top = orbY + "px";
 
-/* FOLLOW MOUSE */
-
+/* Follow cursor/finger */
 document.addEventListener("mousemove",(e)=>{
-
-x = e.clientX
-y = e.clientY
-
-auris.style.left = x + "px"
-auris.style.top = y + "px"
-
-})
-
-/* FOLLOW FINGER (MOBILE) */
-
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
 document.addEventListener("touchmove",(e)=>{
+    mouseX = e.touches[0].clientX;
+    mouseY = e.touches[0].clientY;
+});
 
-x = e.touches[0].clientX
-y = e.touches[0].clientY
+/* Animation loop */
+function animateOrb(){
+    // Distance to cursor
+    const dx = mouseX - orbX;
+    const dy = mouseY - orbY;
+    const distance = Math.sqrt(dx*dx + dy*dy);
 
-auris.style.left = x + "px"
-auris.style.top = y + "px"
+    // Stop if too close (50px)
+    if(distance > 50){
+        orbX += dx * 0.08;
+        orbY += dy * 0.08;
+    }
 
-})
+    auris.style.left = orbX + "px";
+    auris.style.top = orbY + "px";
 
-/* CLICK INTERACTION */
+    requestAnimationFrame(animateOrb);
+}
+animateOrb();
 
-auris.addEventListener("click",()=>{
-
-alert("Hello. I am Auris — your AI assistant.")
-
-})
-
+/* Click interaction */
+auris.addEventListener("click", ()=>{
+    alert("Hello! I am Auris, your AI assistant. ✨");
+});
 </script>
 
 </body>
