@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Auris AI</title>
+
+<style>
+
+body{
+margin:0;
+height:200vh;
+background:#0f172a;
+overflow-x:hidden;
+font-family:Arial;
+}
+
+/* AI Orb */
+
+#auris{
+
+position:fixed;
+width:70px;
+height:70px;
+border-radius:50%;
+
+background:radial-gradient(circle at 30% 30%,#60a5fa,#1e3a8a);
+
+box-shadow:
+0 0 20px #60a5fa,
+0 0 40px #1e40af,
+0 0 60px #1e3a8a;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+cursor:pointer;
+
+transition:
+transform .15s linear,
+left .15s linear,
+top .15s linear;
+
+z-index:9999;
+}
+
+/* Inner Pulse */
+
+#auris::after{
+
+content:"";
+
+width:30px;
+height:30px;
+
+border-radius:50%;
+
+background:white;
+
+opacity:.7;
+
+animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{transform:scale(.6);opacity:.7}
+50%{transform:scale(1);opacity:1}
+100%{transform:scale(.6);opacity:.7}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="auris"></div>
+
+<script>
+
+const auris = document.getElementById("auris")
+
+let x = window.innerWidth/2
+let y = window.innerHeight/2
+
+auris.style.left = x + "px"
+auris.style.top = y + "px"
+
+/* FOLLOW MOUSE */
+
+document.addEventListener("mousemove",(e)=>{
+
+x = e.clientX
+y = e.clientY
+
+auris.style.left = x + "px"
+auris.style.top = y + "px"
+
+})
+
+/* FOLLOW FINGER (MOBILE) */
+
+document.addEventListener("touchmove",(e)=>{
+
+x = e.touches[0].clientX
+y = e.touches[0].clientY
+
+auris.style.left = x + "px"
+auris.style.top = y + "px"
+
+})
+
+/* CLICK INTERACTION */
+
+auris.addEventListener("click",()=>{
+
+alert("Hello. I am Auris — your AI assistant.")
+
+})
+
+</script>
+
+</body>
+</html>
