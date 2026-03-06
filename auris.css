@@ -1,0 +1,154 @@
+body{
+margin:0;
+background:#0b0f1a;
+font-family:Arial;
+}
+
+/* floating mascot */
+
+#auris-button{
+position:fixed;
+bottom:20px;
+right:20px;
+width:70px;
+height:70px;
+border-radius:50%;
+background:#111a2f;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+box-shadow:0 0 15px #00c3ff;
+animation:float 3s ease-in-out infinite;
+z-index:999;
+}
+
+#auris-button img{
+width:55px;
+height:55px;
+}
+
+/* floating animation */
+
+@keyframes float{
+
+0%{transform:translateY(0)}
+50%{transform:translateY(-8px)}
+100%{transform:translateY(0)}
+
+}
+
+/* chat window */
+
+#auris-chat{
+
+position:fixed;
+bottom:110px;
+right:20px;
+width:280px;
+height:350px;
+
+background:#0f1629;
+
+border-radius:15px;
+
+display:none;
+flex-direction:column;
+
+box-shadow:0 0 25px rgba(0,200,255,0.3);
+
+overflow:hidden;
+
+z-index:999;
+
+}
+
+/* header */
+
+#auris-header{
+
+background:#0b1224;
+
+padding:10px;
+
+color:white;
+
+text-align:center;
+
+font-weight:bold;
+
+}
+
+/* messages */
+
+#auris-messages{
+
+flex:1;
+
+padding:10px;
+
+overflow-y:auto;
+
+color:white;
+
+font-size:14px;
+
+}
+
+/* bubbles */
+
+.auris-bubble{
+
+background:#1a2a50;
+
+padding:8px 12px;
+
+border-radius:12px;
+
+margin-bottom:8px;
+
+animation:fade .3s;
+
+}
+
+@keyframes fade{
+
+from{opacity:0;transform:translateY(5px)}
+to{opacity:1;transform:translateY(0)}
+
+}
+
+/* input */
+
+#auris-input{
+
+border:none;
+
+padding:10px;
+
+outline:none;
+
+font-size:14px;
+
+}
+
+/* MOBILE */
+
+@media (max-width:600px){
+
+#auris-chat{
+width:90%;
+right:5%;
+}
+
+#auris-button{
+width:60px;
+height:60px;
+}
+
+#auris-button img{
+width:45px;
+height:45px;
+}
+
+}
