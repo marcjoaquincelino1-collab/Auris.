@@ -28,6 +28,7 @@ body{
     z-index:9999;
     transform:translate(-50%, -50%);
     transition: transform 0.1s linear;
+    pointer-events:auto;
 }
 #auris::after{
     content:"";
@@ -198,7 +199,6 @@ input.addEventListener("keypress", e=>{ if(e.key==="Enter") sendMessage(); });
 reportBtn.addEventListener("click", ()=>{
     alert("Your message has been sent to the admin.");
 });
-
 </script>
 
 </body>
